@@ -1,0 +1,139 @@
+------------------------------
+Week01 - Introduction
+-------------------------------
+    Review 1 - Quiz: Introduction - 5 Questions - 100%
+    Review 2 - Quiz: Linear Regression with One Variable - 5 Questions - 80% <- NOT SO GOOD!!!!!!!!!!
+    Review 3 - Quiz: Linear Algebra - 5 Questions - 100%
+    Programming Assignment - NONE
+    
+--------------------------------------    
+Week02 - Linear Regression
+---------------------------------------
+    Review 1 - Quiz: Linear Regression with Multiple Variables - 5 Questions - 100%
+    Review 2 - Quiz: Octave/Matlab Tutorial - 5 Questions - 100%
+
+    Programing Assignment - Linear Regression - COMPLETED !!!
+
+    == Submitting solutions | Linear Regression with Multiple Variables...
+Use token from last successful submission (sergiorc@gmail.com)? (Y/n): Y
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2439  100  1332  100  1107   2653   2205 --:--:-- --:--:-- --:--:--  4848
+==
+==                                   Part Name |     Score | Feedback
+==                                   --------- |     ----- | --------
+==                            Warm-up Exercise |  10 /  10 | Nice work!
+==           Computing Cost (for One Variable) |  40 /  40 | Nice work!
+==         Gradient Descent (for One Variable) |  50 /  50 | Nice work!
+==                       Feature Normalization |   0 /   0 | Nice work!
+==     Computing Cost (for Multiple Variables) |   0 /   0 | Nice work!
+==   Gradient Descent (for Multiple Variables) |   0 /   0 | Nice work!
+==                            Normal Equations |   0 /   0 | Nice work!
+==                                   --------------------------------
+==                                             | 100 / 100 |
+==
+
+-----------------------------------------    
+Week03 - Logistic Regression
+-----------------------------------------
+    Review 1 - Quiz: Logistic Regression - 5 Questions - 80%  !!!!!!!!!! <- NOT SO GOOD !!!
+    Review 2 - Quiz: Regularization - 5 Questions - 80% !!!!!!!!!! <- NOT SO GOOD !!!
+    Program Assignment - Logistic Regression - COMPLETED !!!
+    
+== Submitting solutions | Logistic Regression...
+Login (email address): sergiorc@gmail.com
+Token: 8b0ZIWop0K6eMteD
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2164  100  1190  100   974   1578   1291 --:--:-- --:--:-- --:--:--  2870
+warning: findstr is obsolete; use strfind instead
+warning: strmatch is obsolete; use strncmp or strcmp instead
+==
+==                                   Part Name |     Score | Feedback
+==                                   --------- |     ----- | --------
+==                            Sigmoid Function |   5 /   5 | Nice work!
+==                    Logistic Regression Cost |  30 /  30 | Nice work!
+==                Logistic Regression Gradient |  30 /  30 | Nice work!
+==                                     Predict |   5 /   5 | Nice work!
+==        Regularized Logistic Regression Cost |  15 /  15 | Nice work!
+==    Regularized Logistic Regression Gradient |  15 /  15 | Nice work!
+==                                   --------------------------------
+==                                             | 100 / 100 |
+==
+
+------------------------------------------------------------    
+Week04 - Neural Networks: Representation
+------------------------------------------------------------
+    Review - Quiz: Neural Networks: Representation - 5 Questions - 100%
+    Programming Assignment - Multi-class Classification and Neural Networks - COMPLETED !!!
+    
+== Submitting solutions | Multi-class Classification and Neural Networks...
+Use token from last successful submission (sergiorc@gmail.com)? (Y/n): Y
+Iteration    25 | Cost: 3.391340e-01
+Iteration    19 | Cost: 6.631438e-02
+Iteration    34 | Cost: 1.002636e-01
+Iteration    24 | Cost: 3.598119e-01
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1546  100   933  100   613   1822   1197 --:--:-- --:--:-- --:--:--  3019
+==
+==                                   Part Name |     Score | Feedback
+==                                   --------- |     ----- | --------
+==             Regularized Logistic Regression |  30 /  30 | Nice work!
+==              One-vs-All Classifier Training |  20 /  20 | Nice work!
+==            One-vs-All Classifier Prediction |  20 /  20 | Nice work!
+==          Neural Network Prediction Function |  30 /  30 | Nice work!
+==                                   --------------------------------
+==                                             | 100 / 100 |
+==
+
+---------------------------------------------------    
+Week05 - Neural Networks: Learning
+---------------------------------------------------
+    Review - Quiz: Neural Networks: Learning - 5 Questions
+    Programming Assignment - Neural Network Learning - NOT SUBMITTED !!!
+------------------------------------------------------------------    
+Week06 - Advice for Applying Machine Learning
+------------------------------------------------------------------
+    Review 1 - Quiz: Advice for Applying Machine Learning - 5 Questions - NOT ANSWERED !!!
+    Review 2 - Quiz: Machine Learning System Design - 5 Questions - NOT ANSWERED !!!
+    Programming Assignment - Regularized Linear Regression and Bias/Variance - NOT SUBMITTED !!!
+------------------------------------------------    
+Week07 - Support Vector Machines
+-------------------------------------------------
+    Review 1 - Quiz: Support Vector Machines - 5 Questions - NOT ANSWERED !!!
+    Programming Assignment - Support Vector Machines - NOT SUBMITTED !!!
+----------------------------------------------    
+Week08 - Unsupervised Learning
+----------------------------------------------
+    Review 1 - Quiz: Unsupervised Learning - 5 Questions - NOT ANSWERED !!!
+    Review 2 - Quiz: Principal Component Analysis - 5 Questions - NOT ANSWERED !!!
+    Programming Assignment - K-Means Clustering and PCA - NOT SUBMITTED !!!
+-----------------------------------------
+Week09 - Anomaly Detection
+-----------------------------------------
+About: 
+    Review 1 - Quiz: Anomaly Detection - 5 Questions - NOT ANSWERED !!!
+    Review 2 - Quiz: Recommender Systems - 5 Questions - NOT ANSWERED !!!
+--------------------------------------------------------
+Week10 - Large Scale Machine Learning
+-------------------------------------------------------
+    About: Welcome to week 10! This week, we will be covering large scale machine learning. Machine learning works best when there is an abundance of data to leverage for training. With the amount data that many websites/companies are gathering today, knowing how to handle ‘big data’ is one of the most sought after skills in Silicon Valley.
+    
+    Topics:
+        Gradient Descent with Large Datasets
+        Advanced Topics
+        Review
+
+    Review 1 - Quiz: Large Scale Machine Learning - 5 Questions - NOT ANSWERED !!!
+-----------------------------------------------------------        
+Week11 - Application Example: Photo OCR
+-----------------------------------------------------------
+    About: Congratulations on making it to the eleventh and final week! This week, we will walk you through a complex, end-to-end application of machine learning, to the application of Photo OCR. Identifying and recognizing objects, words, and digits in an image is a challenging task. We discuss how a pipeline can be built to tackle this problem and how to analyze and improve the performance of such a system.
+
+    Topics:
+        Photo OCR
+        Review
+        Conclusion
+        
+    Review 1 - Quiz: Application: Photo OCR - 5 Questions - NOT ANSWERED !!!
