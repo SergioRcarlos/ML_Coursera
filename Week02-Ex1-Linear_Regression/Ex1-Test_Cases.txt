@@ -1,0 +1,141 @@
+Ex1 Test Cases
+
+Here are the ex1 test cases by Paul T. Mielke and Tom Mosher:
+
+===========
+
+computeCost:
+
+>>computeCost( [1 2; 1 3; 1 4; 1 5], [7;6;5;4], [0.1;0.2] )
+
+ans = 11.9450
+
+----- 
+
+% computeCost may handle multiple features,
+
+%  like computeCostMulti, but isn’t required to
+
+>>computeCost( [1 2 3; 1 3 4; 1 4 5; 1 5 6], [7;6;5;4], [0.1;0.2;0.3])
+
+ans = 7.0175
+
+============
+
+gradientDescent:
+
+Test Case 1:
+
+>>[theta J_hist] = gradientDescent([1 5; 1 2; 1 4; 1 5],[1 6 4 2]',[0 0]',0.01,1000);
+
+% then type in these variable names, to display the final results
+>>theta
+theta =
+    5.2148
+   -0.5733
+>>J_hist(1)
+ans  =  5.9794
+>>J_hist(1000)
+
+For debugging, here are the first few theta values computed in the gradientDescent() for-loop for this test case:
+
+% first iteration 
+theta = 
+   0.032500
+   0.107500
+
+% second iteration
+theta = 
+   0.060375
+   0.194887
+
+The values can be inspected by adding the "keyboard" command within your for-loop. This exits the code to the debugger, where you can inspect the values. Use the "return" command to resume execution.
+
+-----------------
+Test Case 2:
+-----------------
+This test case is similar, but uses a non-zero initial theta value.
+
+>> [theta J_hist] = gradientDescent([1 5; 1 2],[1 6]',[.5 .5]',0.1,10);
+>> theta
+theta =
+   1.70986
+   0.19229
+
+>> J_hist
+J_hist =
+   5.8853
+   5.7139
+          
+For debugging, here are the first few theta values computed in the gradientDescent() for-loop for this test case:
+
+% first iteration
+theta =
+   0.62500
+   0.45000
+
+% second iteration
+theta =
+   0.75500
+   0.42875
+
+======
+
+featureNormalize():
+
+% ---------------
+[Xn mu sigma] = featureNormalize([1 ; 2 ; 3])
+
+% result
+
+Xn =
+  -1
+   0
+   1
+
+=================
+
+computeCostMulti
+
+X = [ 2 1 3; 7 1 9; 1 8 1; 3 7 4 ];
+y = [2 ; 5 ; 5 ; 6];
+theta_test = [0.4 ; 0.6 ; 0.8];
+computeCostMulti( X, y, theta_test )
+
+% result
+ans =  5.2950
+
+===================
+
+   (gradientDescentMulti and normalEqn - see below)
+
+
+gradientDescentMulti() with non-zero initial_theta
+
+Includes intermediate theta values (updated 2021/06/28 - TLM)
+
+X = [ 2 1 3; 7 1 9; 1 8 1; 3 7 4 ];
+y = [2 ; 5 ; 5 ; 6];
+[theta J_hist] = gradientDescentMulti(X, y, [0.1 ; -0.2 ; 0.3], 0.01, 10)
+
+% here are the final theta and cost history values
+theta =
+   0.18556
+   0.50436
+   0.40137
+
+
+normalEqn()
+
+X = [ 2 1 3; 7 1 9; 1 8 1; 3 7 4 ];
+y = [2 ; 5 ; 5 ; 6];
+theta = normalEqn(X,y)
+
+% results
+theta =
+
+   0.0083857
+   0.5681342
+   0.4863732
+
+ 
