@@ -1,0 +1,996 @@
+Test Cases for sigmoid() and predict()
+
+In previous versions of this course we were lucky enough to be provided with unit tests to test our functions for mistakes / errors before submitting them (Maybe Tom might want to bring some of his older ones back?).
+
+For those of you who don't know, unit testing is essentially the practice of testing functions in your code to make sure they work as expected. You can determine if your functions are working properly by cross-referencing your answers with the answers below. This helps identify any failures in your algorithms / logic.
+
+I've provided a few of my own below. Hope this helps some of you out!
+
+(Mentor comment: This thread is closed to comments. If you have a question, please post it in a new thread. Include a copy of the test case you used and your results when you post your question.)
+
+------------------------------
+
+>> sigmoid(-5)
+ans =  0.0066929
+
+>> sigmoid(0)
+ans =  0.50000
+
+>> sigmoid(5)
+ans =  0.99331
+
+>> sigmoid([4 5 6])
+
+Note: If you do not get these result, check that you are including the sigmoid() function, and that the decision threshold is >= 0.5
+
+17 Replies
+Boris Rozinov avatar
+Boris Rozinov
+6 years ago
+
+Thanks a lot for sharing
+
+Giannis Milogiannakis avatar
+Giannis Milogiannakis
+6 years ago
+
+Hello classmates!
+
+I have an issue with costFunctionReg.m. I'm sure that i've write right the formula.
+
+with the tests
+
+12345
+X = [ones(3,1) magic(3)];
+y = [1 0 1]';
+theta = [-2 -1 1 2]';
+[j g] = costFunctionReg(theta, X, y, 3)
+
+ans =
+
+j = 7.6832
+
+g =
+
+0.3172
+
+-0.1277
+
+2.6481
+
+4.2379
+
+1
+[j g] = costFunctionReg(theta, X, y, 5)
+ans =
+
+j = 9.6832
+
+g =
+
+0.3172
+
+-0.7944
+
+3.3148
+
+5.5712
+
+i'm getting 
+
+(test1) j =  7.7162 (difference: 0,033 from the 'right' result)
+
+g = 
+
+0.31722
+
+  -0.12768 
+
+   2.64812 
+
+   4.23787
+
+and
+
+(test 2) j =  9.7162 (difference: 0,033 again! from the 'right' result)
+
+g = 
+
+0.31722
+
+  -0.79435 
+
+   3.31479 
+
+   5.57121
+
+and when i submit it, i get error only at Regularized Logistic Regression Cost, 85/100. 
+
+Any help please? i think its somehow a bug ..
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+Hi, Giannis.
+
+Interesting! Since you pass the unregularized cost part of the exercise and also the regularized gradient, there's only one place the bug could be:  in the regularization term for the cost. There aren't very many moving parts in that calculation. You obviously handled the ignoring of theta(1) for the gradient regularization and if you mistakenly include that in your cost regularization, it makes a way bigger error than -0.033.
+
+I modified my code to print out the regularization term for the cost separately and called it Jreg. Here are my results on the two test cases:
+
+>> [j g] = costFunctionReg(theta, X, y, 3)
+
+Jreg =
+
+     3
+
+j =
+
+    7.6832
+
+g =
+
+    0.3172
+
+   -0.1277
+
+    2.6481
+
+    4.2379
+
+>> [j g] = costFunctionReg(theta, X, y, 5)
+
+Jreg =
+
+     5
+
+j =
+
+    9.6832
+
+g =
+
+    0.3172
+
+   -0.7944
+
+    3.3148
+
+    5.5712
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+Are you sure that you didn't change your cost code (the unregularized part) between the costFunction.m version and the costFunctionReg.m file? The base cost calculation is exactly the same and you just add in the regularization term in the second case.
+
+Giannis Milogiannakis avatar
+Giannis Milogiannakis
+6 years ago
+
+Thank very much for the quick response! 
+
+Well  I modified my code with your way and the outputs were:  
+
+>> [j g] = costFunctionReg(theta, X, y, 3)
+
+j = 3
+
+g =
+
+0.31722
+
+-0.12768
+
+2.64812
+
+4.23787
+
+>> [j g] = costFunctionReg(theta, X, y, 5)
+
+j = 5
+
+g =
+
+0.31722
+
+-0.79435
+
+3.31479
+
+5.57121
+
+Yes i just copied the code from the costFunction and i added the regularization. 
+
+Is there any way to show you my code ?
+
+Giannis Milogiannakis avatar
+Giannis Milogiannakis
+6 years ago
+
+I set theta(1) = 0 after the code of hypothesis and before the code of J(Θ).
+
+I'm wondering if its about the version of Octave (4.0.0), i don't know...
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+There are several ways to interpret your statement about theta(1) = 0. Note that the unregularized portion of J is calculated with the real value of theta(1), right? It's only in the regularization term that you zero it out.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+In other words, you code should look like:
+
+Do exactly what you did in costFunction.m, then set theta(1) = 0 and compute the regularization terms for J and gradient. Then add the regularization terms to J and gradient, right?
+
+Giannis Milogiannakis avatar
+Giannis Milogiannakis
+6 years ago
+
+At the unregularized portion of J, i use the "h" as hypothesis (which i had set it before with the sigmoid function). And i use "theta" at the regularization part.
+
+So the theta(1) = 0 effect only at regularization.
+
+my code is below: 
+
+h = ...(sigmoid function);
+
+theta(1) = 0;
+
+J = unregularized part (copy from costFunction) + regularization part;
+
+grad = ...
+
+----------
+
+I used the command sum on theta^2 , its bad or?
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+I assume you mean "sum(theta.^2)", right? That should be fine, since you have previously set theta(1) = 0. Also I seriously doubt this would be an Octave 4.0.0 issue, but I suppose you never know. Do you have access to older versions? I've had good results from Octave 3.8.1 and lots of people use 3.8.2 successfully.
+
+And you are 100% sure that your "unregularized part" code there does not reference theta? I'd feel better if it looked like:
+
+h = sigmoid stuff
+
+J = unregularized part
+
+theta(1) = 0
+
+J = J + regularized part
+
+Just on general principles ;^) ...
+
+Giannis Milogiannakis avatar
+Giannis Milogiannakis
+6 years ago
+
+1) Yes i mean "sum(theta.^2)".
+
+and i multiple it with λ/2μ . Notice i use parenthesis at λ/(2*m).
+
+2) I followed your idea, i put theta(1) after the unregularized part and i have the same results (-0.033).
+
+I will try to install tomorrow 3.8.2 at my win 7 (as i know it needs an extra program) and i will let you to know. 
+
+Thank very much for your time! 
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+I am totally mystified. Sounds like everything is correct. Maybe it really is an Octave issue. {Edited}
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+6 years ago
+
+There is no reason to back-install Octave 3.8.2. I use Octave 4.0.0 (and I wrote the tutorials), so I know that Octave does these operations correctly.
+
+(edited)
+
+Giannis Milogiannakis avatar
+Giannis Milogiannakis
+6 years ago
+
+Paul found the 'bug', which it was my bad. It was a parenthesis. 
+
+I'm sorry and thank very much for your time. 
+
+I'm more wise now ! ;-)
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+6 years ago
+
+Good news!
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+Hi, Giannis.
+
+Now I know what I should have asked in the first place:  to run the costFunctionReg with lambda = 0 and compare that to the result from the unregularized costFunction. That would have exposed the fact that you did not copy the code from costFunction correctly. Oh, well. An educational experience for both of us ;^) ...
+
+Simão Mendes Lopes avatar
+Simão Mendes Lopes
+6 years ago
+
+Hello everyone!
+
+Everytime I try to test my sigmoid function, this error appears:
+
+Maximum recursion limit of 500 reached. Use set(0,'RecursionLimit',N) to change the limit. Be aware that exceeding your available stack space can crash MATLAB and/or your computer.
+
+Error in sigmoid
+
+The only change I made in the "sigmoid.m" file was add the line:
+
+g = sigmoid(z);
+
+Can anyone explain me what's wrong?
+
+Thank you!
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+6 years ago
+
+Your sigmoid() function is calling itself. That's a terrible idea, and doesn't get the job done of implementing the sigmoid equation.
+
+B
+Berend
+6 years ago
+
+Exp 2 Logistic Regression
+
+!! Submission failed: unexpected error: Undefined function or variable 'z'.
+
+!! Please try again later.
+
+Unfortunately I get this error. Besides my function in Matlab works well (all the test examples are completed and works perfectly etc), I can not submit my answers.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+Berend,
+
+There are six separate parts of ex2 and the submit script runs them all. Perhaps this error is coming from one of the scripts you haven't tested yet. Unfortunately the output from submit strips all the useful information about which function is generating the error. Your best bet is to go through and use Tom's test cases for each one of your functions separately.
+
+B
+Berend
+6 years ago
+
+I just solved the problem. Thank you.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+Good news! Glad to hear that you figured it out.
+
+FO
+Florian Ockhuysen
+6 years ago
+
+Thanks for the unit tests! They helped me out a lot. Because I didn't see an explanation about how to run the unit tests, I thought I'd chime in and show how I did it.
+
+Octave has built in support for unit tests. You can add them at the end of you function file. More explanation can be found here: http://wiki.octave.org/Tests 
+
+You can run your tests automatically by typing for example 'test sigmoid' in Octave, after you've added this at the end of your sigmoid file:
+
+12345678910111213
+%% Define unit tests, see also https://www.gnu.org/software/octave/doc/interpreter/Test-Functions.html
+%% Can be run by typing: 'test sigmoid' in Octave
+
+%!assert (sigmoid(1200000), 1)
+%!assert (sigmoid(-25000), 0)
+%!assert (sigmoid(0), 0.5)
+
+%!shared tol
+%! tol = 5e-05
+%!assert (sigmoid([4 5 6]), [0.9820 0.9933 0.9975], tol)
+
+Note that tol is a variable here that specifies a tolerance in the comparison that assert makes. If you leave this out, because of rounding errors your tests will fail. Try it! And do the same for costFunction and predict. Good luck!
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+6 years ago
+
+All you have to do to use a test case is to enter the command from the workspace, and compare the results. That's the intended method.
+
+Thanks for the tips on the more formal method.
+
+FO
+Florian Ockhuysen
+6 years ago
+
+This way you can keep changing / improving your functions and know for sure that your tests pass with just one command :).
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+6 years ago
+
+I understand that. Copy-and-paste works also.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+6 years ago
+
+Florian,
+
+I was not aware of that Octave facility. Thanks for pointing this out! Here's the official Octave documentation as well:
+
+https://www.gnu.org/software/octave/doc/interpreter/Test-Functions.html#Test-Functions
+
+I did some searching in the Matlab documentation and it appears that they have several different mechanisms to support generation of unit tests, but they are not the same as the Octave mechanism. Of course the Octave code is in the form of comments, so the presence of those lines should not interfere with the execution of the code in Matlab. Here is the Matlab documentation:
+
+http://www.mathworks.com/help/matlab/matlab_prog/write-script-based-unit-tests.html
+
+JM
+José de Mello
+7 years ago
+
+Thanks Paul. 
+
+I'll investigate this issue.
+
+Cheers
+
+JM
+José de Mello
+7 years ago
+
+Hi everyone! Even though my codes are yielding the correct answers for the sigmoid and costFunction, I am not able to submit my answers as it returns the following message:
+
+12
+!! Submission failed: unexpected error: Undefined function or variable 'g'.
+!! Please try again later.
+I am not sure how to solve this issue.
+
+Thank you!
+
+JM
+José de Mello
+7 years ago
+
+Let me be a bit more specific. In the sigmoid.m script, I first defined a function and just plugged z into g (which is my hypothesis). Even though I explicitly defined those two terms in my sigmoid.m script it still asks me to define variable 'g'. What is more weird is that the answers are correct as I enter the same commands on Matlab manually. My code is something like this:
+
+123456789
+% ====================== YOUR CODE HERE ======================
+% Instructions: Compute the sigmoid of each value of z (z can be 
+%a matrix,
+%               vector or scalar).
+z = some function of covariates and parameters;
+g = the hypothesis as a function of z as stated in the pdf file;
+
+% =============================================================
+end
+I do all my computations in matrix form and the vector of covariates and parameters are defined in the Matlab workspace.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Are you sure that you didn't modify the function declaration? The "g" should be defined there as the return value of the sigmoid function:
+
+12
+function g = sigmoid(z)
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+'z' is given to your function via the parameter list. So your line "z = some function..." is totally unnecessary.
+
+I think you have a misunderstanding of how functions work:
+
+Data is passed to it via the parameter list
+
+You perform some processes as necessary
+
+The function returns one or more values.
+
+JM
+José de Mello
+7 years ago
+
+Hi Paul, 
+
+Thank you for the quick reply. Here is my sigmoid.m script (omitting the functions in matrix form):
+
+123456789101112131415161718
+function g = sigmoid(z)
+%SIGMOID Compute sigmoid functoon
+%   J = SIGMOID(z) computes the sigmoid of z.
+
+% You need to return the following variables correctly 
+g = zeros(size(z));
+
+% ====================== YOUR CODE HERE ======================
+% Instructions: Compute the sigmoid of each value of z (z can be a matrix,
+%               vector or scalar).
+
+And I am pretty confident the matrix operations are correct so basically any matrix, vector or scalar could replace z.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Hmmm, looks correct, modulo Tom's comment about z being the input parameter to the function. Try entering these commands into your console and "copy and paste" back the results:
+
+123
+> format long
+> z = magic(3)/10
+> g = sigmoid(z)
+Here's what I get:
+
+>> g = sigmoid(z)
+
+g =
+
+   0.689974481127613   0.524979187478940   0.645656306225795
+
+   0.574442516811659   0.622459331201855   0.668187772168166
+
+   0.598687660112452   0.710949502625004   0.549833997312478
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+Quote from your last message:
+
+----------------------
+
+ "And I am pretty confident the matrix operations are correct so basically any matrix, vector or scalar could replace z.  "
+
+----------------------
+
+This shows that you do not understand how this function is to work. 'z' is provided in the function call. Your job is to process 'z', and turn it into 'g'.
+
+Then 'g' is returned by the function.
+
+End of job.
+
+JM
+José de Mello
+7 years ago
+
+Thank you Tom and Paul,
+
+Paul, when I copy and paste your line of code, I get the same:
+
+12345
+g =
+
+   0.689974481127613   0.524979187478940   0.645656306225795
+   0.574442516811659   0.622459331201855   0.668187772168166
+   0.598687660112452   0.710949502625004   0.549833997312478
+Tom, would you mind expand your point? So I basically have to define the function g (my hypothesis) in the script sigmoid. The problem persists, however.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Jose,
+
+Maybe the error message is coming from a different script, other than sigmoid. Of course submit runs all your programs one after the other and then conveniently strips the error messages to the point that you can't tell which program is generating the error.
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+If you have anything in your script that has 'z = ...", you're doing it wrong.
+
+JM
+José de Mello
+7 years ago
+
+Hi Tom and Paul,
+
+Thank you for the support and patience. I successfully submitted the sigmoid part, should be OK for the rest. 
+
+Cheers!
+
+EB
+Edvinas Bakanas
+7 years ago
+
+I Have one question... 
+
+I've submitted the sigmoid, costFunction and gradient. Prediction function is very simple and it uses the same results from previuos functions. I've tried your suggested testing and get some tests ok and some wrong.... Where should i look? some of my results.
+
+predict([0.3 ; 0.2], [1 2.4; 1 -17; 1 0.5]) 
+
+ans = 
+
+ 
+
+   0 
+
+   0 
+
+   0
+
+predict([0 1 10]', magic(3)) 
+
+ans = 
+
+ 
+
+   1 
+
+   1 
+
+   1
+
+ 
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Edvinas,
+
+You'll need to look at the intermediate values you are getting. I instrumented my "predict" function to print out the probability values (the output of the hypothesis function) in addition to the "true/false" answer that I get by comparing >= 0.5. Here's what I get for the first test case you show:
+
+>> predict([0.3 ; 0.2], [1 2.4; 1 -17; 1 0.5])
+
+p =
+
+   0.685680113938254
+
+   0.043107254941086
+
+   0.598687660112452
+
+ans =
+
+     1
+
+     0
+
+     1
+
+Do you see those same "p" values? If not, then that part of your calculation must be incorrect. If those agree with mine, then the problem is in your logic for deciding whether to map those values to true or false.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Note that there is an easy vectorized way to do comparisons like this. I'll give a different example of the same idea to avoid violating the honor code. Suppose I have a vector and I want to know which elements of the vector are greater than 3.14. Try this code:
+
+12
+> v = [ 7.2; 3.04; 1; 3.16; -5 ]
+> result = (v > 3.14)
+SM
+Sarat Chandra M
+7 years ago
+
+I have been using equations from the video lecture. I was typing when your mail came in that I was using the expression: theta - (partial derivative of cost function)....When I removed the first part of the expression and only used the second part, that is, (partial derivative of cost function), I got the correct answer.
+
+I think the expression in the video lecture is the correct one ! Why does the pdf file have a variant of that expression?
+
+Thanks for the clue, Tom 
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+There's a sign error in the math in the video lecture.
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+There is a complete list of the Errata in the materials in the Course Wiki. See the Week 1 materials for a link.
+
+SM
+Sarat Chandra M
+7 years ago
+
+Thank you Tom ! I will check the Errata.
+
+SM
+Sarat Chandra M
+7 years ago
+
+Hi, I get the correct answer for the cost function but the answer for theta is strange. For one of the unit tests above grad / theta should calculate to [1.776, 2.3988, 1.9464]. My answers are [-1.776, -1.3988, -1.9464]. 
+
+I am unable to figure where I am going wrong. Appreciate any clues or help I can get.
+
+Regards
+
+Sarat
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+Are you using the equations from the video lecture, or the ones in the exercise PDF file? The ones in the video lectures can be incorrect, there is a lot of errata in the videos.
+
+EB
+Edvinas Bakanas
+7 years ago
+
+Hi Mentors,
+
+I have couple questions.
+
+When doing costFunction in Ex2 do I have to put tu functions in the code? one for Cost and one fro grad? because i get the right answer for the cost= 0,693, but then i start a loop for gradient and at the end i do the call to costFuntion (in a loop) like i did in ex1, but as i understand that loop goes to the beggining and starts to calculate costs again... and this is where i got stuck...
+
+By the way. should i get the matrix for the cost...?
+
+thank you for your answer.
+
+Edvinas
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Hi, Edvinas.
+
+In this exercise, there is only one function that returns two output values:  the cost and the gradient. The cost is a scalar value and the gradient is a vector the same size and shape as the theta vector.
+
+So for this case, you can't call the cost function from the gradient function, since they are both the same. So you have to structure the code in such a way that it calculates both results internally.
+
+The template file gives you the function declaration with the two return parameters, so you just need to set both values before the end of the function.
+
+Hope that helps!
+
+Regards,
+
+Paul
+
+EB
+Edvinas Bakanas
+7 years ago
+
+Thanks Paul,
+
+I've changed the code and it looks like almost everything is ok. Except i get the negative numbers. In the formula we should use module, but what is the function in octave? I've tried || but it says it is syntax error. Is there any function summary for octave?
+
+Edvinas
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Hi, Edvinas.
+
+I'm not sure I understand the question. If your cost function is coming out negative, are you sure you understood the formula in the PDF file correctly? Notice that there is a factor of -1 on each of the two terms being added together for the cost function (inside the big sigma).
+
+And I am lost about what you would be using "logical or" for in this problem. Can you please explain a bit more what you mean?
+
+Also it might help to print out your results from some of the unit tests. Have you checked your sigmoid function? There are test cases for that earlier in this thread.
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Sorry, I forgot to answer your question about octave functions. There is lots of information on the web. If you google "octave function list", you'll get lots of hits. Here's one from the GNU Octave main site:
+
+http://octave.sourceforge.net/octave/overview.html
+
+SH
+Syed Ali Hassan
+7 years ago
+
+Thank :) That's help me to debug my function.
+
+ck
+c kumar
+7 years ago
+
+123
+X = [magic(3) ; magic(3)];
+y = [1 0 1 0 1 0]';
+[j g] = costFunction([0 1 0]', X, y)
+Shouldn't theta [0 1 0]' have n+1 values which in this case should be 4 instead of 3 as there are 3 features given that there are 3 columns? I get the unit test values  for theta 1 to 3 with [0 0 1 0]'. Along with that there is also a theta (0) value.
+
+Let me know if I am missing something.
+
+Thanks
+
+ck
+c kumar
+7 years ago
+
+Here is what I did -
+
+After
+
+1
+X = [magic(3) ; magic(3)];
+added the following line
+
+X = [ones(6,1) X];
+
+Modified the costFunction line to read
+
+[j g] = costFunction([0 0 1 0]', X,y);
+
+Got the following results -
+
+j = 2.6067
+
+g -
+
+    0.40808
+
+    1.77597
+
+    2.39883
+
+    1.94642
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+There is no need to add bias units in this case. Try the following:
+
+12
+> X = [magic(3); magic(3)]
+> size(X)
+You'll see that the dimensions in this case are 6 x 3, right? So there are m = 6 samples, each of which has n = 3 features. So you would expect theta in this case to have dimension 3 x 1, right? As it does in the sample Vicc gave ...
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+For this exercise, the bias units are added by the ex2 exercise scripts. You don't add bias units inside your cost function.
+
+See line 61 of ex2.m for example.
+
+ck
+c kumar
+7 years ago
+
+Paul, I agree with what you have stated. Thought the intent was to build a unit test scaffold as close to the real exercise as possible and this would imply adding the intercept term and the corresponding gradient value. May be I misunderstood the intent.
+
+Tom, the bias units are not added to the cost function code in my post above. They are added as part of the unit test framework. Hope I am making myself clear.
+
+Thanks for your responses.
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+You've invented your own test case. That's very fine.
+
+Are you also asking a question? I cannot tell.
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+Additional test case for predict.m ( one that catches if you're missing the sigmoid() function):
+
+12345
+>>predict([0.3 ; 0.2], [1 2.4; 1 -17; 1 0.5])
+ans =
+   1
+   0
+   1
+===============================
+
+keywords: ex2 test case predict
+
+Christoph Lipautz avatar
+Christoph Lipautz
+6 years ago
+
+Thank you, I really couldn't figure out what's wrong with my prediction. You saved me :D
+
+Paul Mielke avatar
+Paul Mielke
+Mentor
+7 years ago
+
+Add a few more search patterns:
+
+keywords: ex2 test case sigmoid
+
+keywords: ex2 test case predict
+
+keywords: ex2 test case costfunction
+
+keywords: ex2 test case costfunctionreg
+
+Tom Mosher avatar
+Tom Mosher
+Mentor
+7 years ago
+
+Adding a tag to hopefully make this thread easier to find:
+
+==========++++++++++==========
+
+Skip to Main Content
+Coursera
+SEARCH IN COURSE
+Search in course
+Shopping cart: 1 item
+
+
+Sergio Ricardo
+Course Navigation
+Stanford University
+Overview
+Grades
+Notes
+Discussion Forums
+Messages
+Resources
+Course Info
+Discussion ForumsWeek 3
+ex2 test cases for costFunction() and costFunctionReg()
+Tom Mosher avatar
+Tom Mosher
+Mentor
+6 years ago
+
+(contributed by mentor Paul T Mielke)
+
+Here is another test case that is a robust because the X matrix is not square and theta has no zero values.
+
+The thread is closed to comments. If you have a question, please post in a new thread, and include a copy of this test case and your results.
+
+(note: updated 1/24/2017 changing lambda from 3 to 4)
+
+12345678910111213141516171819202122232425262728293031
+X = [ones(3,1) magic(3)];
+y = [1 0 1]';
+theta = [-2 -1 1 2]';
+
+% un-regularized
+[j g] = costFunction(theta, X, y)
+% or...
+[j g] = costFunctionReg(theta, X, y, 0)
+
+% results
+
+0 Replies
