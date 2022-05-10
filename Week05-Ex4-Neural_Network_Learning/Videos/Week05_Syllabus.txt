@@ -1,0 +1,24 @@
+-------------------------
+Week 5 - Syllabus
+-------------------------
+1 - Cost Function and Backpropagation
+
+    1.01 - Cost Function
+
+    1.02 - Backpropagation Algorithm
+
+    1.03 - Backpropagation Intuition
+
+2 - Backpropagation in Practice
+
+    2.01 - Implementation Note: Unrolling Parameters
+
+    2.02 - Gradient Checking
+	
+    2.03 - Random Initialization
+	
+    2.04 - Putting It Together
+
+3 - Application of Neural Networks
+
+    3.01 - Autonomous Driving

@@ -1,0 +1,9 @@
+Suppose we want to try to minimize J(Θ)J(\Theta)J(Θ) as a function of Θ\ThetaΘ, using one of the advanced optimization methods (fminunc, conjugate gradient, BFGS, L-BFGS, etc.). What do we need to supply code to compute (as a function of Θ\ThetaΘ)?
+
+Θ\ThetaΘ
+
+J(Θ)J(\Theta)J(Θ)
+
+The (partial) derivative terms ∂∂Θij(l)\frac{\partial}{\partial\Theta_{ij}^{(l)}}∂Θij(l)​∂​ for every i,j,li,j,li,j,l
+
+Correct-> J(Θ)J(\Theta)J(Θ) and the (partial) derivative terms ∂∂Θij(l)\frac{\partial}{\partial\Theta_{ij}^{(l)}}∂Θij(l)​∂​ for every i,j,li,j,li,j,l
