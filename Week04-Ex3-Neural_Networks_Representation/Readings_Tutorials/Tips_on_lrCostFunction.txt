@@ -1,0 +1,5 @@
+When completed, this function is identical to your costFunctionReg() from ex2, but using vectorized methods. See the ex2 tutorials for the cost and gradient - they use vectorized methods. 
+
+ex3.pdf tells you to first implement the unregularized parts, then to implement the regularized parts. Then you test your code, and then submit it for grading. 
+
+Do not remove the line "grad = grad(:)" from the end of the lrCostFunction.m script template. This line guarantees that the grad value is returned as a column vector.

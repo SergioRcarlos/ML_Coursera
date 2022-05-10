@@ -1,0 +1,19 @@
+Making plotDecisionBoundary.m a little more useful - Tom Mosher
+
+The plotDecisionBoundary.m function is hard-coded for the range of X values that are used in the ex2 programming exercise.
+
+You can modify the function so it works for more general purposes by:
+
+
+% insert this code before line 17
+dx = range(X(:,2)) * 0.02;
+
+% comment out this line and replace
+% allows the line to scale with the data set
+%plot_x = [min(X(:,2))-2,  max(X(:,2))+2];
+plot_x = [min(X(:,2))-dx,  max(X(:,2))+dx];
+
+% comment-out this line
+%axis([30, 100, 30, 100])
+
+This isn't a graded function, so you can modify it without impacting your course grade.
